@@ -35,13 +35,6 @@ class TrailLists : AppCompatActivity(), TrailListAdaptter.Trailitemclicked {
     fun FetchData()
     {
         val result = ArrayList<Trail>()
-//        val todo=Trail.builder()
-//            .title("Vernal falls trail")
-//            .description("njhvhgcfdxsd")
-//            .level("hard")
-//            .image("hgftrdrezew")
-//            .build()
-//        result.add(todo)
         mAdaptter.updateitem(result)
 
         Amplify.API.query(

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import android.widget.Toast.*
@@ -15,18 +16,21 @@ import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.core.Amplify
 import com.google.android.material.navigation.NavigationView
 import android.view.MenuItem
+import android.widget.FrameLayout
 import android.widget.TextView
 import com.amplifyframework.api.graphql.model.ModelQuery
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.datastore.generated.model.User
 
 
-class Firstpage : AppCompatActivity() {
+public open class Firstpage : AppCompatActivity() {
      var value:String?= ""
-
+ //rotected  var frameLayout : FrameLayout  = findViewById(R.id.content_frame)
     lateinit var toggle : ActionBarDrawerToggle
-    override fun onCreate(savedInstanceState: Bundle?) {
+   override  fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_firstpage)
+
         Amplify.Auth.fetchUserAttributes(
             { attributes: List<AuthUserAttribute?> -> Log.i(
                 "AuthDemo",
@@ -67,7 +71,7 @@ class Firstpage : AppCompatActivity() {
             )
         }
 
-        setContentView(R.layout.activity_firstpage)
+
 
 //        setSupportActionBar(findViewById(R.id.toolbar))
         toggle= ActionBarDrawerToggle(this,findViewById(R.id.drawer_layout),R.string.open,R.string.close)
@@ -86,11 +90,12 @@ class Firstpage : AppCompatActivity() {
 //                          usertext.setText("Hello"+"\n"+value)
         val intent1=Intent(this,HomePage::class.java)
         val intent2=Intent(this,MainActivity2::class.java)
+        val intent3=Intent(this,MyRecommendations::class.java)
         navview.setNavigationItemSelectedListener {
             when(it.itemId) {
                 menu1.itemId -> startActivity(intent1)
                 menu2.itemId -> startActivity(intent2)
-                menu3.itemId -> Toast.makeText(applicationContext, menu3.title, LENGTH_SHORT).show()
+                menu3.itemId -> startActivity(intent3)
                 menu4.itemId->Amplify.Auth.signOut(
                     { Log.i("AuthQuickstart", "Signed out successfully")
 //                        val intent=Intent(this,MainActivity::class.java)
@@ -104,6 +109,17 @@ class Firstpage : AppCompatActivity() {
             true
     }
         }
+
+//    override fun setContentView(layoutResID: Int) {
+//        //super.setContentView(layoutResID)
+//        val fullview : DrawerLayout =
+//            LayoutInflater.from(parent).inflate(R.layout.activity_firstpage,null) as DrawerLayout
+//        val frame : FrameLayout = findViewById(R.id.content_frame)
+//        LayoutInflater.from(parent).inflate(layoutResID, frame,true)
+//        super.setContentView(fullview)
+//       // setSupportActionBar(to)
+//
+//    }
 
 
 
