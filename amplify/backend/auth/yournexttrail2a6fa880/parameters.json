@@ -1,6 +1,6 @@
 {
     "identityPoolName": "yournexttrail2a6fa880_identitypool_2a6fa880",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "yourne2a6fa880",
     "userPoolName": "yournexttrail2a6fa880_userpool_2a6fa880",
     "autoVerifiedAttributes": [

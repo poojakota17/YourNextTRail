@@ -1,10 +1,40 @@
-type Task @model {
+type Trail @model {
   id: ID!
   title: String!
-  description: String
-  status: String
+  description: String!
+  level: String!
+  image: String!
+  attributes: [TrailAttribute] @connection(name:"trailattribute")
+  reviews: [Reviews]    @connection(name:"trailreview")
 }
-type Note @model {
+type TrailAttribute @model{
+   id: ID!
+  trail: Trail @connection(name:"trailattribute")
+  attributes: Attribute @connection(name:"attributetrail")
+
+}
+
+type Attribute @model {
   id: ID!
-  content: String!
+  name: String!
+  trails: [TrailAttribute] @connection(name:"attributetrail")
+}
+type UserAttribute @model{
+  id:ID!
+  name:String!
+  score: Int!
+  email: String!
+}
+
+type User @model{
+  id:ID!
+  email:String!
+  reviews:[Reviews] @connection(name:"userreviews")
+}
+type Reviews @model{
+  id:ID!
+  review:String!
+  senitment:String!
+  user: User @connection(name:"userreviews")
+  trail: Trail @connection(name:"trailreview")
 }

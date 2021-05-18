@@ -24,5 +24,18 @@
       "dependsOn": [],
       "customAuth": false
     }
+  },
+  "storage": {
+    "trailimagestorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "predictions": {
+    "reviewSentiment": {
+      "providerPlugin": "awscloudformation",
+      "service": "Comprehend",
+      "interpretType": "interpretText"
+    }
   }
 }

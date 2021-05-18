@@ -5,4 +5,11 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="home">Home</string>
+    <string name="find_your_next_favourite_trail">Find your next favourite trail</string>
+    <string name="search">search</string>
+    <string name="enter_a_location">Enter a location</string>
+    <string name="length_7_6_mi_est_4h_30m">length_7_6_mi_est_4h_30m</string>
+    <string name="hard">hard</string>
+    <string name="upper_yosemite_falls_trail">Upper Yosemite Falls Trail</string>
+    <string name="upper">upper</string>
 </resources>

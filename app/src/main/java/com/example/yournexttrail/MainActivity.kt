@@ -10,11 +10,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.AmplifyException
+import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.AuthUserAttribute
 import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
+import com.amplifyframework.core.async.AmplifyOperation
+import com.amplifyframework.datastore.AWSDataStorePlugin
+import com.amplifyframework.logging.AndroidLoggingPlugin
+import com.amplifyframework.logging.LogLevel
+import com.amplifyframework.predictions.aws.AWSPredictionsPlugin
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,8 +30,11 @@ class MainActivity : AppCompatActivity() {
 
         try {
             // Add this line, to include the Auth plugin.
-
+            Amplify.addPlugin(AndroidLoggingPlugin(LogLevel.VERBOSE))
+            Amplify.addPlugin(AWSDataStorePlugin())
             Amplify.addPlugin(AWSCognitoAuthPlugin())
+            Amplify.addPlugin(AWSPredictionsPlugin())
+            Amplify.addPlugin(AWSApiPlugin())
             Amplify.configure(applicationContext)
             Log.i("Yournexttrail", "Initialized Amplify")
         } catch (error: AmplifyException) {
@@ -47,8 +56,7 @@ class MainActivity : AppCompatActivity() {
 
             },
             { Log.e("AmplifyQuickstart", "Failed to fetch auth session") }
-
-)
+        )
         setContentView(R.layout.activity_main)
     }
     fun onbuttonClick( view: View) {

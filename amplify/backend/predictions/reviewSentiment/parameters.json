@@ -1,0 +1,13 @@
+{
+    "resourceName": "reviewSentiment",
+    "interpretPolicyName": "interpretPolicy7e950a1e",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "interpretType": "interpretText",
+    "type": "ALL",
+    "access": "authAndGuest"
+}
