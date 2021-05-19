@@ -1,7 +1,5 @@
 package com.example.yournexttrail
 
-import android.R.id
-import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
@@ -25,7 +23,6 @@ import com.amplifyframework.datastore.generated.model.UserAttribute
 import com.amplifyframework.predictions.PredictionsException
 import com.amplifyframework.predictions.result.InterpretResult
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.runBlocking
 
 
 class MainActivity2 : AppCompatActivity() {
@@ -54,47 +51,38 @@ class MainActivity2 : AppCompatActivity() {
         trailid= intent.getStringExtra("id").toString()
         Glide.with(url.context).load(image).into(url)
 
-           // Thread.sleep(2_000)
-//        runBlocking { if(trailid != "")
-//            getreviews() }
-////
-
-            //Thread.sleep(1_000)
-
-
-      getreviews()
+        mAdaptter= ReviewListAdapter()
+        getreviews()
         while(!updated){
             Thread.sleep(500)
         }
-
+        Log.i("result size", result.size.toString())
 //       updated=false
 
-//            mAdaptter.updateitem(result)
-//            myRecyclerView.adapter = mAdaptter
-            updated = false
+        // mAdaptter.updateitem(result)
+        // myRecyclerView.adapter = mAdaptter
+        updated = false
 
     }
 
 
-
-
-
     fun getreviews(){
-         result = ArrayList()
+        result = ArrayList()
         Amplify.API.query(
             ModelQuery.get(Trail::class.java, trailid),
-            { response
-                ->response.data.reviews.forEach(){
+            { response ->
+                response.data.reviews.forEach(){
                 result.add(it)
             }
+                Log.i("result_size_on_success", result.size.toString())
+                mAdaptter.updateitem(result)
+                runOnUiThread(){
+                    myRecyclerView.adapter = mAdaptter
+                }
 
-//                mAdaptter.updateitem(result)
-//                myRecyclerView.adapter = mAdaptter
-              updated = true
-
-
+                updated = true
                 Log.i(
-                    "MyAmplifyApp",
+                    "trail_title",
                     (response.data.title)
                 )
             }

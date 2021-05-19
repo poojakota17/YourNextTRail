@@ -12,15 +12,23 @@
     android:onClick="traildetails"
     app:cardBackgroundColor="@color/cardview_shadow_end_color"
     android:backgroundTint="@color/cardview_dark_background">
+
     <TextView
         android:id="@+id/reviewtext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="352dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:textSize="12dp"
+        android:layout_marginTop="27dp"
          />
 
 </androidx.cardview.widget.CardView>
