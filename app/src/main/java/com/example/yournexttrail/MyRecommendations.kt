@@ -33,9 +33,6 @@ class MyRecommendations : AppCompatActivity(), Recommendationadapter.Trailitemcl
         mAdapter= Recommendationadapter(this)
         updated=false
         getmyrecommendedtrails()
-//        while (!updated){
-//            Thread.sleep(500)
-//        }
         while (currentSync < 1 || currentSync<totalSync){
             Thread.sleep(500)
         }

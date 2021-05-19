@@ -1,5 +1,7 @@
 package com.example.yournexttrail
 
+import android.R.id
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
@@ -8,6 +10,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amplifyframework.api.ApiException
 import com.amplifyframework.api.graphql.GraphQLResponse
 import com.amplifyframework.api.graphql.model.ModelMutation
@@ -21,12 +25,21 @@ import com.amplifyframework.datastore.generated.model.UserAttribute
 import com.amplifyframework.predictions.PredictionsException
 import com.amplifyframework.predictions.result.InterpretResult
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.runBlocking
+
 
 class MainActivity2 : AppCompatActivity() {
     var trailid : String=""
+    lateinit var  mAdaptter: ReviewListAdapter
+    lateinit var result: ArrayList<Reviews>
+    var updated: Boolean = false
+    lateinit var myRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+        myRecyclerView = findViewById(R.id.myRecyclerView2)
+
+        myRecyclerView.layoutManager= LinearLayoutManager(this)
         val title=intent.getStringExtra("title")
         val description= intent.getStringExtra("description")
         val image= intent.getStringExtra("image")
@@ -40,6 +53,59 @@ class MainActivity2 : AppCompatActivity() {
         val url : ImageView = findViewById(R.id.image)
         trailid= intent.getStringExtra("id").toString()
         Glide.with(url.context).load(image).into(url)
+
+           // Thread.sleep(2_000)
+//        runBlocking { if(trailid != "")
+//            getreviews() }
+////
+
+            //Thread.sleep(1_000)
+
+
+      getreviews()
+        while(!updated){
+            Thread.sleep(500)
+        }
+
+//       updated=false
+
+//            mAdaptter.updateitem(result)
+//            myRecyclerView.adapter = mAdaptter
+            updated = false
+
+    }
+
+
+
+
+
+    fun getreviews(){
+         result = ArrayList()
+        Amplify.API.query(
+            ModelQuery.get(Trail::class.java, trailid),
+            { response
+                ->response.data.reviews.forEach(){
+                result.add(it)
+            }
+
+//                mAdaptter.updateitem(result)
+//                myRecyclerView.adapter = mAdaptter
+              updated = true
+
+
+                Log.i(
+                    "MyAmplifyApp",
+                    (response.data.title)
+                )
+            }
+        ) { error: ApiException ->
+            Log.e(
+                "MyAmplifyApp",
+                error.toString(),
+                error
+            )
+        }
+
     }
 
     fun savereview(view: View) {

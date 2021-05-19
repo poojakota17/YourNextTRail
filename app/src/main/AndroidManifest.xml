@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YourNextTrail">
-        <activity android:name=".MyRecommendations"></activity>
+        <activity android:name=".MyReviews"></activity>
+        <activity android:name=".MyRecommendations" />
         <activity android:name=".TrailLists" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".ViewDetails" />

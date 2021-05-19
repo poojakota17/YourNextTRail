@@ -12,7 +12,7 @@
         android:id="@+id/inputlocation"
         android:layout_width="225dp"
         android:layout_height="44dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="155dp"
         android:autofillHints=""
 
         android:foregroundTint="#B81616"
@@ -22,7 +22,7 @@
         android:paddingTop="0pt"
         android:textColorHint="#0C848F"
         android:textSize="25sp"
-
+android:textStyle="italic"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="155dp"
         android:layout_marginEnd="100dp"
         android:background="#493505"
         android:backgroundTint="@color/white"
@@ -46,15 +46,15 @@
         android:textColorHint="#050404"
         android:textFontWeight="15"
         android:textSize="25sp"
-        android:textStyle="bold"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintHorizontal_bias="0.338"
         app:layout_constraintStart_toEndOf="@+id/inputlocation"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="cursive"
@@ -70,14 +70,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/yourliking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your likings"
         android:textSize="25dp"
-        android:textStyle="bold"
+        android:textStyle="italic"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toTopOf="@id/chipgroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputlocation"
         app:layout_constraintVertical_bias="0.696" />
@@ -90,7 +92,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginStart="80dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputlocation"/>
+        app:layout_constraintTop_toBottomOf="@id/yourliking"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

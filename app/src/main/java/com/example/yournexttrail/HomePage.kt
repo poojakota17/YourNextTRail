@@ -25,7 +25,9 @@ class HomePage : AppCompatActivity() {
         //val view : View = LayoutInflater.from(this).inflate(R.layout.activity_home_page,frameLayout)
         setContentView(R.layout.activity_home_page)
         //super.onCreateDrawer(savedInstanceState)
+     //   supportActionBar?.setDisplayHomeAsUpEnabled(true)
         getLikings()
+
 
     }
 

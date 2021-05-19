@@ -41,18 +41,19 @@ class MainActivity : AppCompatActivity() {
             Log.e("Yournexttrail", "Could not initialize Amplify", error)
         }
         Log.i("Hello","HELLO WORLD")
-        Amplify.Auth.signInWithWebUI(this,
-            { Log.i("AuthQuickStart", "Signin OK = $it")
-
-
-            },
-            { Log.e("AuthQuickStart", "Signin failed", it) }
-        )
+//        Amplify.Auth.signInWithWebUI(this,
+//            { Log.i("AuthQuickStart", "Signin OK = $it")
+//
+//
+//            },
+//            { Log.e("AuthQuickStart", "Signin failed", it) }
+//        )
 
         Amplify.Auth.fetchAuthSession(
             { Log.i("AmplifyQuickstart", "Auth session = $it")
-                val intent = Intent(this, Firstpage::class.java )
-                startActivity(intent)
+//                Thread.sleep(1_000)
+//                val intent = Intent(this, Firstpage::class.java )
+//                startActivity(intent)
 
             },
             { Log.e("AmplifyQuickstart", "Failed to fetch auth session") }
@@ -60,8 +61,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
     fun onbuttonClick( view: View) {
-        val viewIntent = Intent(Intent.ACTION_VIEW, Uri.parse(" https://yournexttrail-dev.auth.us-east-1.amazoncognito.com/"))
-        startActivity(viewIntent);
+        Amplify.Auth.signInWithWebUI(this,
+            { Log.i("AuthQuickStart", "Signin OK = $it")
+                Thread.sleep(1_000)
+                val intent = Intent(this, Firstpage::class.java )
+                startActivity(intent)
+
+            },
+            { Log.e("AuthQuickStart", "Signin failed", it) }
+        )
+//        val viewIntent = Intent(Intent.ACTION_VIEW, Uri.parse(" https://yournexttrail-dev.auth.us-east-1.amazoncognito.com/"))
+       // startActivity(viewIntent);
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

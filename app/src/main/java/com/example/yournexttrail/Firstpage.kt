@@ -21,6 +21,7 @@ import android.widget.TextView
 import com.amplifyframework.api.graphql.model.ModelQuery
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.datastore.generated.model.User
+import kotlinx.coroutines.runBlocking
 
 
 public open class Firstpage : AppCompatActivity() {
@@ -54,10 +55,12 @@ public open class Firstpage : AppCompatActivity() {
                                 },
                                 { Log.e("MyAmplifyApp", "Query failure", it) }
                             )
-//                             val headerview=findViewById<NavigationView>(R.id.navigationView).getHeaderView(0)
-//                             val usertext=headerview.findViewById<TextView>(R.id.useremail)
-//                            usertext.setText("Hello"+"\n"+attribute.value)
-
+                            runOnUiThread()
+                            {
+                                val headerview = findViewById<NavigationView>(R.id.navigationView).getHeaderView(0)
+                                val usertext = headerview.findViewById<TextView>(R.id.useremail)
+                                usertext.setText("Hello" + "\n" + value)
+                            }
                         }
                     }
                 }
@@ -73,7 +76,7 @@ public open class Firstpage : AppCompatActivity() {
 
 
 
-//        setSupportActionBar(findViewById(R.id.toolbar))
+      //setSupportActionBar(findViewById(R.id.toolbar))
         toggle= ActionBarDrawerToggle(this,findViewById(R.id.drawer_layout),R.string.open,R.string.close)
         findViewById<DrawerLayout>(R.id.drawer_layout).addDrawerListener(toggle)
         toggle.syncState()
@@ -85,11 +88,14 @@ public open class Firstpage : AppCompatActivity() {
         val menu2=menu.findItem(R.id.item2)
         val menu3=menu.findItem(R.id.item3)
         val menu4=menu.findItem(R.id.item4)
-//        val headerview=findViewById<NavigationView>(R.id.navigationView).getHeaderView(0)
-//                          val usertext=headerview.findViewById<TextView>(R.id.useremail)
-//                          usertext.setText("Hello"+"\n"+value)
+//        runOnUiThread()
+//        {
+//            val headerview = findViewById<NavigationView>(R.id.navigationView).getHeaderView(0)
+//            val usertext = headerview.findViewById<TextView>(R.id.useremail)
+//            usertext.setText("Hello" + "\n" + value)
+//        }
         val intent1=Intent(this,HomePage::class.java)
-        val intent2=Intent(this,MainActivity2::class.java)
+        val intent2=Intent(this,MyReviews::class.java)
         val intent3=Intent(this,MyRecommendations::class.java)
         navview.setNavigationItemSelectedListener {
             when(it.itemId) {
@@ -98,8 +104,12 @@ public open class Firstpage : AppCompatActivity() {
                 menu3.itemId -> startActivity(intent3)
                 menu4.itemId->Amplify.Auth.signOut(
                     { Log.i("AuthQuickstart", "Signed out successfully")
-//                        val intent=Intent(this,MainActivity::class.java)
+                        Thread.sleep(500)
+                        pushtomainactivity()
+
+//                        val intent = Intent(this, MainActivity::class.java)
 //                        startActivity(intent)
+
                     },
                     { Log.e("AuthQuickstart", "Sign out failed", it) }
 
@@ -120,7 +130,10 @@ public open class Firstpage : AppCompatActivity() {
 //       // setSupportActionBar(to)
 //
 //    }
-
+fun pushtomainactivity(){
+    val intent = Intent(this, MainActivity::class.java)
+    startActivity(intent)
+}
 
 
      override fun onOptionsItemSelected(item: MenuItem ): Boolean {
