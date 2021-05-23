@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyReviews">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myReviewRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <ListView
-        android:id="@+id/reviewlist"
-        android:layout_width="410dp"
-        android:layout_height="708dp"
-        android:layout_alignParentLeft="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <ListView-->
+<!--        android:id="@+id/reviewlist"-->
+<!--        android:layout_width="410dp"-->
+<!--        android:layout_height="708dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-    </ListView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    </ListView>-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation"
+        app:itemBackground="@color/teal_700"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/drawer_view"
+        android:layout_alignParentBottom="true"
+        app:labelVisibilityMode="labeled"/>
+</RelativeLayout>

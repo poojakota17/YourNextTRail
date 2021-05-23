@@ -26,6 +26,7 @@ import kotlinx.coroutines.runBlocking
 
 public open class Firstpage : AppCompatActivity() {
      var value:String?= ""
+   // protected var mdrawer : DrawerLayout = findViewById(R.id.drawer_layout)
  //rotected  var frameLayout : FrameLayout  = findViewById(R.id.content_frame)
     lateinit var toggle : ActionBarDrawerToggle
    override  fun onCreate(savedInstanceState: Bundle?) {

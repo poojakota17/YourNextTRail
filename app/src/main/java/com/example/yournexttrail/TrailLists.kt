@@ -1,6 +1,8 @@
 package com.example.yournexttrail
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,15 +13,66 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.Consumer
 import com.amplifyframework.datastore.generated.model.Trail
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.play.core.tasks.OnSuccessListener
 
 class TrailLists : AppCompatActivity(), TrailListAdaptter.Trailitemclicked {
     lateinit var  mAdaptter: TrailListAdaptter
     var updated: Boolean = false
+    lateinit var bottomNavigation :BottomNavigationView
     lateinit var myRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trail_lists)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        val colorDrawable = ColorDrawable(Color.parseColor("#FF018786"))
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
+        bottomNavigation= findViewById(R.id.bottom_navigation)
+        bottomNavigation.setSelectedItemId(R.id.item1)
+        val menu=bottomNavigation.menu
+        val menu1= menu.findItem(R.id.item1)
+        val menu2=menu.findItem(R.id.item2)
+        val menu3=menu.findItem(R.id.item3)
+        val menu4=menu.findItem(R.id.item4)
+        val intent1=Intent(this,HomePage::class.java)
+        val intent2=Intent(this,MyReviews::class.java)
+        val intent3=Intent(this,MyRecommendations::class.java)
+        bottomNavigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
+            when(it.itemId){
+                menu1.itemId -> {
+                    startActivity(intent1)
+                    overridePendingTransition(0,0)
+                    true
+                }
+                menu2.itemId -> {
+                    startActivity(intent2)
+                    overridePendingTransition(0,0)
+                    true
+                }
+                menu3.itemId -> {
+                    startActivity(intent3)
+                    overridePendingTransition(0,0)
+                    true
+                }
+                menu4.itemId->Amplify.Auth.signOut(
+                    { Log.i("AuthQuickstart", "Signed out successfully")
+                        Thread.sleep(500)
+                        //pushtomainactivity()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(0,0)
+                        true
+
+
+
+                    },
+                    { Log.e("AuthQuickstart", "Sign out failed", it) }
+
+                )
+
+            }
+            false
+        })
         myRecyclerView = findViewById(R.id.myRecyclerView)
 
         myRecyclerView.layoutManager= LinearLayoutManager(this)

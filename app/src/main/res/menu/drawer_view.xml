@@ -5,17 +5,22 @@
 <item
     android:id="@+id/item1"
     android:title="@string/home"
+    android:icon="@drawable/ic_baseline_home_24"
     />
     <item
         android:id="@+id/item2"
-        android:title="My Reviews"
+        android:title="Reviews"
+        android:icon="@drawable/ic_baseline_reviews_24"
+
 
         />
     <item android:id="@+id/item3"
-        android:title="My Recommendations"
+        android:title="Recommendations"
+        android:icon="@drawable/ic_baseline_thumb_up_24"
         />
     <item android:id="@+id/item4"
-        android:title="logout" />
+        android:title="logout"
+        android:icon="@drawable/ic_baseline_logout_24"/>
 
 
 </menu>

@@ -1,12 +1,15 @@
 package com.example.yournexttrail
 
+import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,18 +26,70 @@ import com.amplifyframework.datastore.generated.model.UserAttribute
 import com.amplifyframework.predictions.PredictionsException
 import com.amplifyframework.predictions.result.InterpretResult
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity2 : AppCompatActivity() {
     var trailid : String=""
     lateinit var  mAdaptter: ReviewListAdapter
     lateinit var result: ArrayList<Reviews>
+    lateinit var bottomNavigation :BottomNavigationView
+
     var updated: Boolean = false
     lateinit var myRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        val colorDrawable = ColorDrawable(Color.parseColor("#FF018786"))
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
+        bottomNavigation= findViewById(R.id.bottom_navigation)
+        bottomNavigation.setSelectedItemId(R.id.item1)
+        val menu=bottomNavigation.menu
+        val menu1= menu.findItem(R.id.item1)
+        val menu2=menu.findItem(R.id.item2)
+        val menu3=menu.findItem(R.id.item3)
+        val menu4=menu.findItem(R.id.item4)
+        val intent1= Intent(this,HomePage::class.java)
+        val intent2= Intent(this,MyReviews::class.java)
+        val intent3= Intent(this,MyRecommendations::class.java)
+        bottomNavigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
+            when(it.itemId){
+                menu1.itemId -> {
+                    startActivity(intent1)
+                    overridePendingTransition(0,0)
+                    true
+                }
+                menu2.itemId -> {
+                    startActivity(intent2)
+                    overridePendingTransition(0,0)
+                    true
+                }
+                menu3.itemId -> {
+                    startActivity(intent3)
+                    overridePendingTransition(0,0)
+                    true
+                }
+                menu4.itemId->Amplify.Auth.signOut(
+                    { Log.i("AuthQuickstart", "Signed out successfully")
+                        Thread.sleep(500)
+                        //pushtomainactivity()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(0,0)
+                        true
+                    },
+                    { Log.e("AuthQuickstart", "Sign out failed", it) }
+
+                )
+
+            }
+            false
+        })
         myRecyclerView = findViewById(R.id.myRecyclerView2)
+//        val itemDecor = DividerItemDecoration(applicationContext, ClipDrawable.HORIZONTAL)
+//        itemDecor.setDrawable(getDrawable(R.drawable.divider)!!)
+//        myRecyclerView.addItemDecoration(itemDecor)
 
         myRecyclerView.layoutManager= LinearLayoutManager(this)
         val title=intent.getStringExtra("title")
@@ -95,15 +150,51 @@ class MainActivity2 : AppCompatActivity() {
         }
 
     }
+    fun alert(view : View) {
+        val input = EditText(this@MainActivity2)
+        val lp: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+        input.layoutParams = lp
+        val positiveButtonClick = { dialog: DialogInterface, which: Int ->
+            savereview(input.text.toString())
 
-    fun savereview(view: View) {
-        val review : EditText= findViewById(R.id.review)
+           Thread.sleep(500)
+           // getreviews()
+            Toast.makeText(
+                applicationContext,
+                "Review Saved", Toast.LENGTH_SHORT
+            ).show()
+
+        }
+        val negativeButtonClick = { dialog: DialogInterface, which: Int ->
+            Toast.makeText(
+                applicationContext,
+                "Cancel", Toast.LENGTH_SHORT
+            ).show()
+
+        }
+        val builder = AlertDialog.Builder(this)
+        with(builder)
+        {
+            setTitle("Write a review")
+            //setMessage(str)
+            setView(input)
+            setIcon(R.drawable.ic_baseline_rate_review_24)
+            setPositiveButton("SAVE", DialogInterface.OnClickListener(function = positiveButtonClick))
+            setNegativeButton("CANCEL",DialogInterface.OnClickListener(function = negativeButtonClick))
+            show()
+        }
+    }
+    fun savereview(rev : String) {
+       // val review : EditText= findViewById(R.id.review)
         val str : String
         val e= PreferenceManager.getDefaultSharedPreferences(this).getString("email", "default value")
         val userid = PreferenceManager.getDefaultSharedPreferences(this).getString("userid", "default value")
         Log.i("email",e!!)
-        str= review.text.toString()
-
+        //str= review.text.toString()
+        str=rev
         Amplify.Predictions.interpret(
             str,
             { result: InterpretResult ->

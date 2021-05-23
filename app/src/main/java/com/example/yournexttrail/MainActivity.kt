@@ -1,32 +1,30 @@
 package com.example.yournexttrail
 
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.e
-import android.util.Log.i
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.amplifyframework.AmplifyException
 import com.amplifyframework.api.aws.AWSApiPlugin
-import com.amplifyframework.auth.AuthException
-import com.amplifyframework.auth.AuthUserAttribute
-import com.amplifyframework.auth.AuthUserAttributeKey
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
-import com.amplifyframework.core.async.AmplifyOperation
 import com.amplifyframework.datastore.AWSDataStorePlugin
 import com.amplifyframework.logging.AndroidLoggingPlugin
 import com.amplifyframework.logging.LogLevel
 import com.amplifyframework.predictions.aws.AWSPredictionsPlugin
+
 
 class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        val colorDrawable = ColorDrawable(Color.parseColor("#FF018786"))
+        supportActionBar?.setBackgroundDrawable(colorDrawable)
 
         try {
             // Add this line, to include the Auth plugin.
@@ -64,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         Amplify.Auth.signInWithWebUI(this,
             { Log.i("AuthQuickStart", "Signin OK = $it")
                 Thread.sleep(1_000)
-                val intent = Intent(this, Firstpage::class.java )
+                val intent = Intent(this, HomePage::class.java )
                 startActivity(intent)
 
             },
