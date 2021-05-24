@@ -1,10 +1,12 @@
 package com.example.yournexttrail
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.view.LayoutInflater
-import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,11 +16,11 @@ import com.bumptech.glide.Glide
 
 class TrailListAdaptter(private  val listener: Trailitemclicked): RecyclerView.Adapter<TrailListAdaptter.ViewHolder>(){
    private val items : ArrayList<Trail> = ArrayList()
-    private val parklists = arrayOf("#1 - Death Valley National Park","#2 - Yosemite National Park","#3 - Sequoia and Kings Canyon National Park",
-        "#4 - Redwood National and State Park","#5 - Joshua Tree National Park","#6 - Lassen Volcanic National Park",
-        "#7 - Pinnacles National Park", "#8 - Point Reyes National Seashore")
-
-    private val reviewlist = arrayOf("4.9/5","4.8/5", "4.8/5","4.8/5","4.8/5","4.7/5","4.7/5","4.5/5")
+//    private val parklists = arrayOf("#1 - Death Valley National Park","#2 - Yosemite National Park","#3 - Sequoia and Kings Canyon National Park",
+//        "#4 - Redwood National and State Park","#5 - Joshua Tree National Park","#6 - Lassen Volcanic National Park",
+//        "#7 - Pinnacles National Park", "#8 - Point Reyes National Seashore")
+//
+//    private val reviewlist = arrayOf("4.9/5","4.8/5", "4.8/5","4.8/5","4.8/5","4.7/5","4.7/5","4.5/5")
 
 //    private val imageslist= intArrayOf(R.drawable.deathvalley, R.drawable.yosemite,R.drawable.sequoia,R.drawable.redwood,
 //        R.drawable.joshua,R.drawable.lassen, R.drawable.pinnacles, R.drawable.point_reyes )
@@ -28,11 +30,13 @@ class TrailListAdaptter(private  val listener: Trailitemclicked): RecyclerView.A
         var image: ImageView
         var title: TextView
         var review: TextView
+        var share : ImageButton
 
         init {
             image = itemView.findViewById(R.id.park_image)
             title = itemView.findViewById(R.id.parkname)
             review = itemView.findViewById(R.id.park_review)
+            share = itemView.findViewById(R.id.sharebutton)
         }
     }
 
@@ -60,6 +64,28 @@ class TrailListAdaptter(private  val listener: Trailitemclicked): RecyclerView.A
         holder.title.text= currentitem.title
         holder.review.text=  currentitem.level
         Glide.with(holder.itemView.context).load(currentitem.image).into(holder.image)
+        holder.share.setOnClickListener(View.OnClickListener {
+            val intent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TITLE, currentitem.description)
+
+                // (Optional) Here we're setting the title of the content
+                putExtra(
+                    Intent.EXTRA_TEXT, "Let's go for a trip to "
+                            + currentitem.title +"\n" +currentitem.image
+                )
+               // putExtra(Intent.EXTRA_STREAM,Uri.parse(currentitem.image))
+                    type ="text/plain"
+                // (Optional) Here we're passing a content URI to an image to be displayede
+              // data = currentitem.image.to
+              // flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            }
+            val shareIntent = Intent.createChooser(intent, null)
+                it.context.startActivity(shareIntent)
+
+
+        })
+
         //holder.image.setImageResource(imageslist[position])
     }
     fun updateitem(updateitem : ArrayList<Trail>){
