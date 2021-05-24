@@ -1,8 +1,10 @@
 package com.example.yournexttrail
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -33,11 +35,13 @@ class Recommendationadapter (private  val listener: Trailitemclicked): RecyclerV
         var image: ImageView
         var title: TextView
         var review: TextView
+        var share: ImageButton
 
         init {
             image = itemView.findViewById(R.id.park_image)
             title = itemView.findViewById(R.id.parkname)
             review = itemView.findViewById(R.id.park_review)
+            share = itemView.findViewById(R.id.sharebutton)
         }
     }
 
@@ -66,6 +70,21 @@ class Recommendationadapter (private  val listener: Trailitemclicked): RecyclerV
         holder.title.text = currentitem.title
         holder.review.text = currentitem.level
         Glide.with(holder.itemView.context).load(currentitem.image).into(holder.image)
+        holder.share.setOnClickListener(View.OnClickListener {
+            val intent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TITLE, currentitem.description)
+                putExtra(
+                    Intent.EXTRA_TEXT, "Let's go for a trip to "
+                            + currentitem.title +"\n" +currentitem.image
+                )
+                type ="text/plain"
+            }
+            val shareIntent = Intent.createChooser(intent, null)
+            it.context.startActivity(shareIntent)
+
+
+        })
         //holder.image.setImageResource(imageslist[position])
     }
 
