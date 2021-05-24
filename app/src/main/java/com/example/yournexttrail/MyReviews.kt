@@ -9,6 +9,7 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +38,8 @@ class MyReviews : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(colorDrawable)
         bottomNavigation= findViewById(R.id.bottom_navigation)
         bottomNavigation.setSelectedItemId(R.id.item2)
+//        val homelayout : RelativeLayout =findViewById(R.id.myreview)
+//        homelayout.setBackgroundColor(Color.parseColor("#C9A959"))
         val menu=bottomNavigation.menu
         val menu1= menu.findItem(R.id.item1)
         val menu2=menu.findItem(R.id.item2)

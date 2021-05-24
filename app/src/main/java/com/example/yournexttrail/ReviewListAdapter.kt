@@ -31,7 +31,7 @@ class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val oneview: View =
-                LayoutInflater.from(parent.context).inflate(R.layout.reviewview, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.trailreviews, parent, false)
             // val viewholder = ViewHolder(oneview)
 
             return ViewHolder(oneview)
@@ -44,18 +44,15 @@ class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>()
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val currentitem = items[position]
             // if(currentitem)
-            Log.i("d1", currentitem.user.email)
-            Log.i("d2", currentitem.review)
+//            Log.i("d1", currentitem.user.email)
+//            Log.i("d2", currentitem.review)
+            holder.title.text = currentitem.user.email.substringBefore("@")
+            holder.review.text = currentitem.review
             if (currentitem.senitment == "POSITIVE") {
-                holder.title.text = currentitem.user.email
-                holder.review.text = currentitem.review
                 //  Glide.with(holder.itemView.context).load(get).into(holder.image)
                 holder.image.setImageResource(R.drawable.ic_baseline_sentiment_satisfied_alt_24)
             }
             else if(currentitem.senitment == "NEGATIVE" ){
-                holder.title.text = currentitem.user.email
-                holder.review.text = currentitem.review
-                //  Glide.with(holder.itemView.context).load(get).into(holder.image)
                 holder.image.setImageResource(R.drawable.ic_baseline_sentiment_very_dissatisfied_24)
             }
 
@@ -68,6 +65,10 @@ class ReviewListAdapter() : RecyclerView.Adapter<ReviewListAdapter.ViewHolder>()
             notifyDataSetChanged()
         }
 
+        fun additem(item: Reviews) {
+            items.add(item)
+            notifyDataSetChanged()
+        }
 
     }
 

@@ -5,27 +5,24 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
-    android:layout_margin="15dp"
-    android:foreground="?selectableItemBackground"
+    android:layout_margin="10dp"
+    android:layout_marginBottom="5dp"
+    android:backgroundTint="@color/teal_200"
     android:clickable="true"
-    android:onClick="traildetails"
-    app:cardBackgroundColor="@color/cardview_shadow_end_color"
-    android:backgroundTint="@color/cardview_dark_background">
+    android:foreground="?selectableItemBackground"
+    app:cardBackgroundColor="#789796"
+    app:cardCornerRadius="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
 
         <ImageView
             android:id="@+id/park_image"
-            android:layout_width="375dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="396dp"
+            android:layout_height="202dp"
             android:scaleType="centerCrop"
 
 
@@ -36,14 +33,14 @@
             android:id="@+id/parkname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif"
             android:text="Yosemite National Park"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:fontFamily="cursive"/>
+            android:textSize="22sp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/park_review"
@@ -53,10 +50,10 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-condensed-medium"
             android:text="Review"
-            android:textSize="22sp"
-            android:textColor="@color/teal_700"
-            android:fontFamily="cursive"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 

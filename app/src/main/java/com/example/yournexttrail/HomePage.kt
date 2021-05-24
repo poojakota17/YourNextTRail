@@ -32,13 +32,14 @@ class HomePage : AppCompatActivity() {
     override  fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayShowCustomEnabled(true)
-        val colorDrawable = ColorDrawable(Color.parseColor("#FF018786"))
+       val colorDrawable = ColorDrawable(Color.parseColor("#087E8B"))
+
         supportActionBar?.setBackgroundDrawable(colorDrawable)
         //val view : View = LayoutInflater.from(this).inflate(R.layout.activity_home_page,frameLayout)
         setContentView(R.layout.activity_home_page)
-//      val homelayout : RelativeLayout=findViewById(R.id.homelayout)
-//        homelayout.setBackgroundColor(Color.parseColor("#C0CDDA"))
-        getLikings()
+//     val homelayout : RelativeLayout=findViewById(R.id.homelayout)
+//      homelayout.setBackgroundColor(Color.parseColor("#C2DACE"))
+        runOnUiThread() { getLikings() }
        // val navview=findViewById<NavigationView>(R.id.navigationView)
 
        bottomNavigation= findViewById(R.id.bottom_navigation)
@@ -109,6 +110,7 @@ class HomePage : AppCompatActivity() {
                         val chip = Chip(this, null, R.style.Widget_MaterialComponents_Chip_Choice)
                             .apply { text = todo.name
                                 chipIcon=getDrawable(R.drawable.ic_baseline_favorite_24)
+                                textSize= 18F
                             }
 
                         chipGroup.addView(chip)

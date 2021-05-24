@@ -100,8 +100,8 @@ class MainActivity2 : AppCompatActivity() {
         name.text=title
         val desc : TextView = findViewById(R.id.description)
         desc.text=description
-        val le : TextView=findViewById(R.id.level)
-        le.text=level
+//        val le : TextView=findViewById(R.id.level)
+//        le.text=level
         val url : ImageView = findViewById(R.id.image)
         trailid= intent.getStringExtra("id").toString()
         Glide.with(url.context).load(image).into(url)
@@ -218,7 +218,17 @@ class MainActivity2 : AppCompatActivity() {
                             "Reviewresponse",
                             "Todo with id: " + response.data.id
                         )
+                        runOnUiThread(){
+                            //Thread.sleep(500)
+                            mAdaptter.additem(response.data)
+                        }
+//                        getreviews()
+//                        while(!updated){
+//                            Thread.sleep(500)
+//                        }
+//                        updated = false
 
+//
                     }
                 ) { error: ApiException? ->
                     Log.e(

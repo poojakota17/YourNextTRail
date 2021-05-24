@@ -33,6 +33,7 @@ android:scaleType="fitXY"
         android:text="Find Your next Trail! "
         android:textColor="@android:color/holo_green_dark"
         android:textSize="25dp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:textStyle="italic" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -44,6 +45,7 @@ android:scaleType="fitXY"
         android:background="@drawable/button"
         android:onClick="onbuttonClick"
         android:text="Login"
+        android:textSize="18dp"
         android:textStyle="italic" />
 
 </RelativeLayout>
