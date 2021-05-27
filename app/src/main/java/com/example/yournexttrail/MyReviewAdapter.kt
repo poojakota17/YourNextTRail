@@ -7,6 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.amplifyframework.api.ApiException
+import com.amplifyframework.api.graphql.GraphQLResponse
+import com.amplifyframework.api.graphql.model.ModelMutation
+import com.amplifyframework.core.Amplify
+import com.amplifyframework.core.model.Model
+import com.amplifyframework.core.model.query.Where
 import com.amplifyframework.datastore.generated.model.Reviews
 
 class MyReviewAdapter() : RecyclerView.Adapter<MyReviewAdapter.ViewHolder>() {
@@ -52,6 +58,7 @@ class MyReviewAdapter() : RecyclerView.Adapter<MyReviewAdapter.ViewHolder>() {
         else if(currentitem.senitment == "NEGATIVE" ){
             //  Glide.with(holder.itemView.context).load(get).into(holder.image)
             holder.image.setImageResource(R.drawable.ic_baseline_sentiment_very_dissatisfied_24)
+
         }
 
 
@@ -61,6 +68,21 @@ class MyReviewAdapter() : RecyclerView.Adapter<MyReviewAdapter.ViewHolder>() {
         items.clear()
         items.addAll(updateitem)
         notifyDataSetChanged()
+    }
+    fun deleteitem(pos : Int){
+
+        items.removeAt(pos)
+        deletereview(pos)
+        notifyItemRemoved(pos)
+
+
+    }
+    fun deletereview(pos : Int){
+        Amplify.DataStore.delete(items[pos],{
+            Log.i("deleted review",it.toString())
+        }){
+            Log.e("MyAmplifyApp", "Delete failed", it)
+        }
     }
 
 }

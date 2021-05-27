@@ -13,7 +13,6 @@ type TrailAttribute @model{
   attributes: Attribute @connection(name:"attributetrail")
 
 }
-
 type Attribute @model {
   id: ID!
   name: String!
@@ -25,7 +24,6 @@ type UserAttribute @model{
   score: Int!
   email: String!
 }
-
 type User @model{
   id:ID!
   email:String!

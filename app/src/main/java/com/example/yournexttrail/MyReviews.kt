@@ -2,16 +2,14 @@ package com.example.yournexttrail
 
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amplifyframework.api.ApiException
@@ -88,13 +86,15 @@ class MyReviews : AppCompatActivity() {
         myRecyclerView = findViewById(R.id.myReviewRecycler)
         myRecyclerView.layoutManager= LinearLayoutManager(this)
         mAdaptter= MyReviewAdapter()
+        var itemTouchHelper =ItemTouchHelper(SwipeToDelete(mAdaptter))
+        itemTouchHelper.attachToRecyclerView(myRecyclerView)
         getmyreviews()
         while (!updated){
             Thread.sleep(1_000)
         }
         //myRecyclerView.adapter=mAdaptter
         updated=false
-//        Thread.sleep(1_000)
+
     }
 
     fun getmyreviews(){

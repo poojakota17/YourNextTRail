@@ -49,5 +49,16 @@ android:scaleType="fitXY"
         android:textAllCaps="false"
         android:textSize="18dp"
         android:textStyle="normal" />
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:indeterminate="true"
+        app:indicatorSize="50dp"
+        android:id="@+id/spinner"
+        app:indeterminateAnimationType="contiguous"
+        app:indicatorColor="@color/purple_700"
+        android:layout_marginStart="100dp"
+        />
 
 </RelativeLayout>

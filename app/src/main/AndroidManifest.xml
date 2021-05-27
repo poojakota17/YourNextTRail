@@ -25,6 +25,7 @@
         <activity android:name=".ViewDetails" />
         <activity android:name=".HomePage"
             android:label="Home"
+
             android:icon="@drawable/ic_baseline_home_24"/>
         <activity android:name=".Firstpage" />
         <activity android:name=".MainActivity"
